@@ -163,6 +163,16 @@
 
 #include "Eigen/Core"
 
+// Visual Studio 2010 or older version
+#if defined(_MSC_VER) && _MSC_VER <= 1600
+namespace std {
+inline bool isfinite(double x) { return _finite(x);                }
+inline bool isinf   (double x) { return !_finite(x) && !_isnan(x); }
+inline bool isnan   (double x) { return _isnan(x);                 }
+inline bool isnormal(double x) { return _finite(x) && x != 0.0;    }
+}  // namespace std
+#endif
+
 namespace ceres {
 
 template <typename T, int N>
@@ -639,6 +649,10 @@ struct NumTraits<ceres::Jet<T, N> > {
   typedef ceres::Jet<T, N> Real;
   typedef ceres::Jet<T, N> NonInteger;
   typedef ceres::Jet<T, N> Nested;
+
+  static typename ceres::Jet<T, N> dummy_precision() {
+    return ceres::Jet<T, N>(1e-12);
+  }
 
   enum {
     IsComplex = 0,

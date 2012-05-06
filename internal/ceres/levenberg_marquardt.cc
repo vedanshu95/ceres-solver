@@ -181,6 +181,7 @@ bool RunCallback(IterationCallback* callback,
     default:
       LOG(FATAL) << "Unknown status returned by callback: "
                  << status;
+	  return NULL;
   }
 }
 

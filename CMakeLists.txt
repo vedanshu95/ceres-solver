@@ -309,6 +309,23 @@ IF (NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Release)
 ENDIF (NOT CMAKE_BUILD_TYPE)
 
+IF (MSVC)
+  # Disable signed/unsigned int conversion warnings.
+  ADD_DEFINITIONS( "/wd4018")
+  # Disable warning about using struct/class for the same symobl.
+  ADD_DEFINITIONS( "/wd4099")
+  # Disable warning about the insecurity of using "std::copy".
+  ADD_DEFINITIONS("/wd4996")
+  # Disable performance warning about int-to-bool conversion.
+  ADD_DEFINITIONS("/wd4800")
+  # Disable performance warning about fopen insecurity.
+  ADD_DEFINITIONS("/wd4996")
+  # Disable warning about int64 to int32 conversion. Disabling
+  # this warning may not be correct; needs investigation.
+  # TODO(keir): Investigate these warnings in more detail.
+  ADD_DEFINITIONS("/wd4244")
+ENDIF (MSVC)
+
 ADD_SUBDIRECTORY(internal/ceres)
 ADD_SUBDIRECTORY(examples)
 

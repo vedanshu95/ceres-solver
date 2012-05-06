@@ -129,7 +129,7 @@ class PowellEvaluator2 : public Evaluator {
             1.0,
             0.0,
             0.0,
-            sqrt(10) * 2.0 * (x1 - x4) * (1.0 - x4);
+            sqrt(10.0) * 2.0 * (x1 - x4) * (1.0 - x4);
       }
       if (col2) {
         jacobian_matrix.col(column_index++) <<
@@ -152,7 +152,7 @@ class PowellEvaluator2 : public Evaluator {
             0.0,
             -sqrt(5.0),
             0.0,
-            sqrt(10) * 2.0 * (x1 - x4) * (x1 - 1.0);
+            sqrt(10.0) * 2.0 * (x1 - x4) * (x1 - 1.0);
       }
       VLOG(1) << "\n" << jacobian_matrix;
     }

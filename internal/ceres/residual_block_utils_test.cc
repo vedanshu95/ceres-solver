@@ -112,6 +112,9 @@ class NoJacobianUpdateCostFunction: public SizedCostFunction<1, 1> {
   }
 };
 
+// MSVC refuses to compile the 1.0/0.0.
+#ifndef _WIN32
+
 class BadResidualCostFunction: public SizedCostFunction<1, 1> {
  public:
   virtual bool Evaluate(double const* const* parameters,
@@ -153,6 +156,8 @@ TEST(ResidualBlockUtils, IsArrayValid) {
   EXPECT_FALSE(IsArrayValid(3, x));
 }
 
+#endif  // _WIN32
+
 // Note: It is preferable to write the below test as:
 //
 //  CheckEvaluation(GoodCostFunction(), true);
@@ -170,10 +175,12 @@ TEST(ResidualBlockUtils, CheckAllCombinationsOfBadness) {
   CheckEvaluation(no_residual, false);
   NoJacobianUpdateCostFunction no_jacobian;
   CheckEvaluation(no_jacobian, false);
+#ifndef _WIN32
   BadResidualCostFunction bad_residual;
   CheckEvaluation(bad_residual, false);
   BadJacobianCostFunction bad_jacobian;
   CheckEvaluation(bad_jacobian, false);
+#endif  // _WIN32
 }
 
 }  // namespace internal

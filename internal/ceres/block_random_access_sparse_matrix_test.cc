@@ -106,7 +106,7 @@ TEST(BlockRandomAccessSparseMatrix, GetCell) {
             0);
 
   // There is nothing else in the matrix besides these four blocks.
-  EXPECT_EQ(dense.norm(), sqrt(9 + 16 * 16 + 36 * 20 + 9 * 15));
+  EXPECT_EQ(dense.norm(), sqrt(9. + 16. * 16. + 36. * 20. + 9. * 15.));
 }
 
 }  // namespace internal

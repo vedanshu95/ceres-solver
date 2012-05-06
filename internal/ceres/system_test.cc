@@ -45,6 +45,7 @@
 
 #include <glog/logging.h>
 #include "ceres/file.h"
+#include "gflags/gflags.h"
 #include "gtest/gtest.h"
 #include "ceres/stringprintf.h"
 #include "ceres/test_util.h"
